@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
 import axios from '../../axios-orders';
-import Order from '../../components/Order/Order'
+import Order from '../../components/Order/Order';
+import {connect} from 'react-redux';
 
 class Orders extends Component{
 
@@ -11,7 +12,7 @@ class Orders extends Component{
     }
 
     componentDidMount() {
-        axios.get('/orders.json')
+        axios.get('/orders.json?auth='+this.props.token+'&orderBy="userId"&equalTo="'+localStorage.getItem('userId')+'"')
             .then(response => {
                 console.log(response.data);
                 const fetchedOrders = [];
@@ -42,4 +43,11 @@ class Orders extends Component{
 
 }
 
-export default Orders;
+const mapStateToProps = (state) => {
+    return {
+        token: state.auth.token
+    }
+
+}
+
+export default connect(mapStateToProps)(Orders);

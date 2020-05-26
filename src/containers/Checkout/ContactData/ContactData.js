@@ -22,7 +22,7 @@ class ContactData extends Component{
                     validation:{
                         required:true
                     },
-                    valid: false
+                    valid: true
                 },
                 email:{
                     elementType : 'input',
@@ -35,7 +35,7 @@ class ContactData extends Component{
                         required:true
 
                     },
-                    valid: false
+                    valid: true
                 },
                 street:{
                     elementType : 'input',
@@ -48,7 +48,7 @@ class ContactData extends Component{
                         required:true
 
                     },
-                    valid: false
+                    valid: true
                 },
                 postalCode:{
                     elementType : 'input',
@@ -61,7 +61,7 @@ class ContactData extends Component{
                         required:true
 
                     },
-                    valid: false
+                    valid: true
                 },
                 country:{
                     elementType : 'input',
@@ -73,7 +73,7 @@ class ContactData extends Component{
                     validation:{
                         required:true
                     },
-                    valid: false
+                    valid: true
                 },
                 deliveryMethod: {
                     elementType : 'select',
@@ -87,7 +87,7 @@ class ContactData extends Component{
                     validation:{
                         required:true
                     },
-                    valid: false
+                    valid: true
                 }
         }
     }
@@ -118,10 +118,11 @@ class ContactData extends Component{
         const order = {
             ingredients: this.props.ingredients,
             price:  this.props.totalPrice,
-            orderData : formData
+            orderData : formData,
+            userId: this.props.userId
         }
 
-        this.props.onOrderBurger(order);
+        this.props.onOrderBurger(order,this.props.token);
            alert('continue shopping');
     }
 
@@ -176,13 +177,15 @@ const mapStateToProps = (state) => {
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        onOrderBurger : (orderData) => dispatch(actions.purchaseBurgerStart(orderData))
+        onOrderBurger : (orderData,token) => dispatch(actions.purchaseBurgerStart(orderData,token))
     }
 }
 

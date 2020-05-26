@@ -9,3 +9,8 @@ export const PURCHASE_BURGER_FAIL = 'PURCHASE_BURGER_FAIL';
 
 export const PURCHASE_INIT ='PURCHASE_INIT'
 
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+
+export const LOGOUT = "LOGOUT"
